@@ -94,7 +94,9 @@
 
                                 <div class="price-box">
                                     <span class="new-price"><?= $product->price ?> Грн.</span>
-                                    <span class="old-price"><?= $product->price ?></span>
+                    <?php if((float)$product->old_price): ?>
+                                    <span class="old-price"><?= $product->old_price ?></span>
+                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -112,16 +114,34 @@
 </div>
 <!-- pagination start -->
 
-    <div class="row">
-        <?=
-        /** @var TYPE_NAME $pages */
-        \yii\widgets\LinkPager::widget([
-            'pagination' => $pages,
-            'nextPageCssClass' => 'next test',
-                       'maxButtonCount' => 3,
-        ]) ?>
-    </div>
 
+
+<!-- pagination end -->
+<!-- pagination start -->
+<!--<div class="shop-pagination">-->
+<!--    <div class="pagination">-->
+<!--        <ul>-->
+<!--            <li class="active">1</li>-->
+<!--            <li><a href="#">2</a></li>-->
+<!--            <li><a href="#">3</a></li>-->
+<!--            <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>-->
+<!--            <div class="row">-->
+                <?=
+                /** @var TYPE_NAME $pages */
+                \yii\bootstrap4\LinkPager::widget([
+                        'linkContainerOptions'=>['class' => "shop-pagination"],
+                        'activePageCssClass'=>'active',
+                    'options' => ['class' => 'pagination','style' => 'color: #777'],
+                    'linkOptions' => ['class' => 'row', 'style' => ' background-color: #0000'],
+                    'disabledPageCssClass' => 'shop-pagination',
+                    'pagination' => $pages,
+                    'maxButtonCount' => 3,
+                    'firstPageCssClass'=>'active'
+                ]) ?>
+<!--            </div>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
 <!-- pagination end -->
 </div>
 </div>

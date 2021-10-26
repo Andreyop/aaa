@@ -84,15 +84,6 @@ class SiteController extends \frontend\base\Controller
             'dataProvider' => $dataProvider
         ]);
     }
-    public function actionProduct()
-    {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Product::find()->published(),
-        ]);
-        return $this->render('product', [
-            'dataProvider' => $dataProvider
-        ]);
-    }
 
     /**
      * Logs in a user.

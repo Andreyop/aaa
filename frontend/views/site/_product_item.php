@@ -33,7 +33,10 @@
 
     <div class="price-box">
         <span class="new-price"><?= $model->price ?> грн.</span>
-        <span class="old-price"><?= $model->price ?> грн.</span>
+
+        <?php if((float)$model->old_price): ?>
+            <span class="old-price"><?= $model->old_price ?></span>
+        <?php endif; ?>
     </div>
 </div>
 

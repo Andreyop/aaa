@@ -69,52 +69,51 @@
                     </ul>
                 </aside>
                 <!-- widget-tags end -->
-                <!-- widget-recent start -->
-                <aside class="widget top-product-widget">
-                    <h3 class="sidebar-title">Top rated products</h3>
-                    <ul>
-                        <li>
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img class="primary-image" src="img/product/15.jpg" alt="" />
-                                        <img class="secondary-image" src="img/product/16.jpg" alt="" />
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <div class="pro-info">
-                                        <h2 class="product-name"><a href="#">Curabitur vulputate</a></h2>
-                                        <div class="price-box">
-                                            <span class="new-price">£90.00</span>
-                                            <span class="old-price">£120.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="single-product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img class="primary-image" src="img/product/women/8.jpg" alt="" />
-                                        <img class="secondary-image" src="img/product/women/1.jpg" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="product-content">
-                                    <div class="pro-info">
-                                        <h2 class="product-name"><a href="#">Pellentesque posuere</a></h2>
-                                        <div class="price-box">
-                                            <span class="new-price">£50.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </aside>
-                <!-- widget-recent end -->
-                <? print_r(__DIR__); ?>
+<!--                <!-- widget-recent start -->-->
+<!--                <aside class="widget top-product-widget">-->
+<!--                    <h3 class="sidebar-title">Top rated products</h3>-->
+<!--                    <ul>-->
+<!--                        <li>-->
+<!--                            <div class="single-product">-->
+<!--                                <div class="product-img">-->
+<!--                                    <a href="#">-->
+<!--                                        <img class="primary-image" src="img/product/15.jpg" alt="" />-->
+<!--                                        <img class="secondary-image" src="img/product/16.jpg" alt="" />-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div class="product-content">-->
+<!--                                    <div class="pro-info">-->
+<!--                                        <h2 class="product-name"><a href="#">Curabitur vulputate</a></h2>-->
+<!--                                        <div class="price-box">-->
+<!--                                            <span class="new-price">£90.00</span>-->
+<!--                                            <span class="old-price">£120.00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <div class="single-product">-->
+<!--                                <div class="product-img">-->
+<!--                                    <a href="#">-->
+<!--                                        <img class="primary-image" src="img/product/women/8.jpg" alt="" />-->
+<!--                                        <img class="secondary-image" src="img/product/women/1.jpg" alt="" />-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!---->
+<!--                                <div class="product-content">-->
+<!--                                    <div class="pro-info">-->
+<!--                                        <h2 class="product-name"><a href="#">Pellentesque posuere</a></h2>-->
+<!--                                        <div class="price-box">-->
+<!--                                            <span class="new-price">£50.00</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </aside>-->
+<!--                <!-- widget-recent end -->-->
             </div>
             <!-- blog-left-sidebar end -->
 
