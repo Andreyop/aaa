@@ -11,7 +11,7 @@ use yii\helpers\FileHelper;
  * This is the model class for table "{{%products}}".
  *
  * @property int $id
- *  * @property int $category_id
+ * @property int $category_id
  * @property string $name
  * @property string|null $description
  * @property string|null $image
@@ -22,6 +22,7 @@ use yii\helpers\FileHelper;
  * @property int|null $updated_at
  * @property int|null $created_by
  * @property int|null $updated_by
+ * @property int $sale
  *
  * @property CartItem[] $cartItems
  * @property OrderItem[] $orderItems
@@ -57,7 +58,7 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name','category_id', 'price', 'old_price', 'status'], 'required'],
+            [['name','category_id', 'price','sale', 'old_price', 'status'], 'required'],
             [['description'], 'string'],
             [['price'], 'number'],
             [['imageFile'], 'image', 'extensions' => 'png, jpg, jpeg, webp', 'maxSize' => 10 * 1024 * 1024],
@@ -83,6 +84,7 @@ class Product extends \yii\db\ActiveRecord
             'imageFile' => 'Product Image',
             'price' => 'Price',
             'old_price' => 'Old Price',
+            'sale' => 'Sale',
             'status' => 'Publish',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
