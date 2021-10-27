@@ -60,7 +60,9 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 single-product"  >
 
                         <div class="single-product" data-key=<?= $product->id; ?>>
+                            <?php if ((float)$model->sale) { ?>
                             <span class="sale-text">Sale</span>
+                            <?php } ?>
                             <div class="product-img">
                                 <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>">
                                     <img class="primary-image" src="<?php echo $product->getImageUrl() ?>" alt=""/>

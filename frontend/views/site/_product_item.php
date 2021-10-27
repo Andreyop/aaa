@@ -1,8 +1,9 @@
 <?php
 /** @var \common\models\Product $model */
 ?>
-
-<span class="sale-text">Sale</span>
+<?php if ((float)$model->sale) { ?>
+    <span class="sale-text">Sale</span>
+<?php } ?>
 <div class="product-img">
     <a href="<?php echo \yii\helpers\Url::to(['product/view?id=' . $model->id]) ?>">
         <img class="primary-image" src="<?php echo $model->getImageUrl() ?>" alt=""/>
@@ -34,7 +35,7 @@
     <div class="price-box">
         <span class="new-price"><?= $model->price ?> грн.</span>
 
-        <?php if((float)$model->old_price): ?>
+        <?php if ((float)$model->old_price): ?>
             <span class="old-price"><?= $model->old_price ?></span>
         <?php endif; ?>
     </div>
