@@ -113,7 +113,7 @@ AppAsset::register($this);
                                 <?php echo Yii::$app->user->identity->getDisplayName() ?>
                             </span>
                             <img class="img-profile rounded-circle"
-                                 src="/img/undraw_profile.svg">
+                                 src="/backend/web/img/undraw_profile_2.svg"
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

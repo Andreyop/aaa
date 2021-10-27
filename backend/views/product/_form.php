@@ -14,7 +14,9 @@ use yii\bootstrap4\ActiveForm;
     <?php $form = ActiveForm::begin([
         'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
-    <?= $form->field($model, 'category_id')->textInput() ?>
+    <?= $form->field($model, 'category_id')->dropDownList(
+        \yii\helpers\ArrayHelper::map($cats, 'id', 'title'
+    )) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
