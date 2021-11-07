@@ -3,6 +3,11 @@
 /** @var TYPE_NAME $category */
 /** @var \yii\data\ActiveDataProvider $dataProvider */
 
+use frontend\components\BrandsWidget;
+use yii\widgets\LinkPager;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
+
 
 ?>
 
@@ -13,7 +18,8 @@
             <div class="col-md-12">
                 <div class="breadcrumb">
                     <ul>
-                        <li><i class="fa fa-home" aria-hidden="true"></i><a href="<?= \yii\helpers\Url::home() ?>">Home</a><span>  |  </span></li>
+                        <li><i class="fa fa-home" aria-hidden="true"></i><a
+                                    href="<?= \yii\helpers\Url::home() ?>">Home</a><span>  |  </span></li>
                         <li><?= $category->title ?></li>
                     </ul>
                 </div>
@@ -22,135 +28,167 @@
     </div>
 </div>
 
-<? echo $this->render('//layouts\inc\sidebar') ?>
+<!-- blog-area start -->
+<div class="shop-area">
+    <div class="container">
+        <div class="row">
+            <!-- shop-left-sidebar start -->
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <!-- widget-categories start -->
+                <aside class="widget widget-categories">
+                    <!--                <aside class="widget widget-categories" >-->
+                    <h3 class="sidebar-title">Categories</h3>
+                    <div class="mainmenu">
+                        <ul class="sidebar-menu">
+                            <?= frontend\components\MenuWidget::widget([
+                                'tpl' => 'menu',
+                                'ul_class' => 'sub-menu',
+                            ]) ?>
+                        </ul>
+                </aside>
+                </aside>
+                <aside class="widget widget-categories">
+                    <!--                <aside class="widget widget-categories" >-->
+                    <h3 class="sidebar-title">Brands</h3>
+                    <div class="mainmenu">
+                        <ul class="sidebar-menu">
+                            <?= BrandsWidget::widget(); ?>
+                        </ul>
+                </aside>
+                <!-- shop-filter start -->
+                <aside class="widget shop-filter">
+                    <h3>Price</h3>
+                    <input type="hidden" id="hidden_minimum_price" value="0"/>
+                    <input type="hidden" id="hidden_maximum_price" value="65000"/>
+                    <p id="price_show">1000 - 65000</p>
+                    <div id="price_range"></div>
+                </aside>
+                <!-- shop-filter end -->
+                <!-- filter-by start -->
+                <aside class="widget filter-by">
+                    <h3 class="sidebar-title">Filter by</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#">L</a> <span class="count">(1)</span></li>
+                        <li><a href="#">M</a> <span class="count">(1)</span></li>
+                        <li><a href="#">S</a> <span class="count">(1)</span></li>
+                        <li><a href="#">XL</a> <span class="count">(1)</span></li>
+                    </ul>
+                </aside>
+                <!-- filter-by end -->
+                <!-- widget-tags start -->
+                <aside class="widget widget-tags">
+                    <h3 class="sidebar-title">Tags</h3>
+                    <ul>
+                        <li><a href="#">asian</a></li>
+                        <li><a href="#">brown</a></li>
+                        <li><a href="#">euro</a></li>
+                        <li><a href="#">fashion</a></li>
+                        <li><a href="#">france</a></li>
+                        <li><a href="#">hat</a></li>
+                        <li><a href="#">travel</a></li>
+                        <li><a href="#">white</a></li>
+                        <li><a href="#">t-shirt</a></li>
+                        <li><a href="#">teen</a></li>
+                    </ul>
+                </aside>
 
+                <!-- widget-tags end -->
+                <!-- widget-recent start -->
+                <aside class="widget top-product-widget">
+                    <h3 class="sidebar-title">Top rated products</h3>
+                    <ul>
+                        <? if (!empty($product_sale)) {
+                            foreach ($product_sale
 
-<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 ">
-    <!-- toolbar start -->
-    <div class="toolbar">
-                <div class="show-result">
-<!--                    <p> Showing 1–--><?// echo $count = $dataProvider->getCount();?><!-- of --><?// echo $totalCount = $dataProvider->getTotalCount();?><!-- results</p>-->
-        </div>
-        <div class="toolbar-form">
-            <form action="#">
-                <div class="tolbar-select">
-                    <select>
-                        <option value="volvo">Sort by popularity</option>
-                        <option value="saab">Default sorting</option>
-                        <option value="mercedes">Sort by average rating</option>
-                        <option value="audi">Sort by newness</option>
-                        <option value="audi">Sort by price: low to high</option>
-                        <option value="audi">Sort by price: high to low</option>
-                    </select>
-                </div>
-            </form>
-        </div>
-    </div>
-    <!-- toolbar end -->
-
-    <div class="clear"></div>
-
-    <div class="row">
-
-        <div class="grid-view">
-            <!-- single-product start -->
-            <?php if (!empty($products)) {
-                foreach ($products as $product): ?>
-
-                    <div class="col-lg-4 col-md-4 col-sm-4 single-product"  >
-
-                        <div class="single-product" data-key=<?= $product->id; ?>>
-                            <?php if ((float)$model->sale) { ?>
-                            <span class="sale-text">Sale</span>
-                            <?php } ?>
-                            <div class="product-img">
-                                <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>">
-                                    <img class="primary-image" src="<?php echo $product->getImageUrl() ?>" alt=""/>
-
-                                </a>
-                                <div class="actions">
-                                    <div class="action-buttons">
-                                        <div class="add-to-cart">
-                                            <a href="<?php echo \yii\helpers\Url::to(['/cart/add']) ?>" class="btn-add-to-cart">Add to cart</a>
-                                        </div>
-                                        <div class="add-to-links">
-                                            <div class="add-to-wishlist">
-                                                <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $product->id]) ?>" data-toggle="tooltip" title="Add to Wishlist"><i
-                                                            class="fa fa-star"></i>
-                                                </a>
+                                     as $value) {
+                                ?>
+                                <li>
+                                    <div class="single-product" style="width: 70%;">
+                                        <a href="#">
+                                            <img class="primary-image" src="<?php echo $value->getImageUrl() ?>"
+                                                 alt=""/>
+                                        </a>
+                                        <div class="product-content">
+                                            <h2 class="product-name">
+                                                <a href="<?= \yii\helpers\Url::to(['product/view', 'id' => $value->id]) ?>">
+                                                    <?php echo $value->name ?>
+                                                </a></h2>
+                                            <div class="price-box">
+                                                <span class="new-price"><?= $value->price ?></span>
+                                                <?php if ((float)$value->old_price): ?>
+                                                    <span class="old-price"><?= $value->old_price ?></span>
+                                                <?php endif; ?>
                                             </div>
-                                            <div class="compare-button">
-                                                <a href="#" data-toggle="tooltip" title="Compare"><i
-                                                            class="fa fa-exchange"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="quickviewbtn">
-                                            <a href="#" data-toggle="tooltip" title="Quick View"><i
-                                                        class="fa fa-search-plus"></i></a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="product-content">
-                                <h2 class="product-name"><a href="#"><h3><?= $product->name ?></h3> <?= $product->description ?></a></h2>
+                                </li>
+                            <? }
+                        } ?>
+                    </ul>
+                </aside>
+                <!-- widget-recent end -->
+            </div>
+            <!-- blog-left-sidebar end -->
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <!-- toolbar start -->
+                <div class="toolbar">
+                    <div class="show-result">
+                        <p> Showing 0–<? echo $count = $dataProvider->getCount(); ?>
+                            of <? echo $totalCount = $dataProvider->getTotalCount(); ?> results</p>
+                    </div>
 
-                                <div class="price-box">
-                                    <span class="new-price"><?= $product->price ?> Грн.</span>
-                    <?php if((float)$product->old_price): ?>
-                                    <span class="old-price"><?= $product->old_price ?></span>
-                    <?php endif; ?>
-                                </div>
-                            </div>
+                    <div class="toolbar-form">
+
+                        <div class="tolbar-select">
+                            <button class="btn btn-gray dropdown-toggle" type="button" data-toggle="dropdown">Сортировка по:
+                              </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?= \yii\helpers\Url::to([$category->id.'?sort=price']); ?>">Цене, по возрастанию</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to([$category->id.'?sort=-price']); ?>">Цене, по убыванию</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to([$category->id.'?sort=name']); ?>">Названию товара, от А до Я</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to([$category->id.'?sort=-name']); ?>">Названию товара, от Я до А</a></li>
+                            </ul>
                         </div>
                     </div>
 
-                <?php endforeach;
-            } ?>
-            <!-- single-product end -->
 
+                <!-- toolbar end -->
+
+
+                </aside>
+                <!-- widget-recent end -->
+            <!-- blog-left-sidebar end -->
+                <div class="clear"></div>
+
+
+
+                <?php Pjax::begin(); ?>
+                <?php echo ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'layout' => '<div class="row">{items}</div>{pager}',
+                    'itemView' => '_product_item',
+                    'itemOptions' => [
+
+                        'class' => 'col-lg-4 col-md-6 mb-4  single-product',
+
+                    ],
+
+                    'pager' => [
+
+                        'options' => ['class' => 'pagination', 'style' => 'color: #777'],
+                        'linkOptions' => ['class' => 'row', 'style' => ' background-color: #0000'],
+                        'disabledPageCssClass' => 'shop-pagination',
+                        'class' => LinkPager::class
+                    ]
+                ]) ?>
+                <?php Pjax::end(); ?>
+            </div>
+        </div>
         </div>
     </div>
-
-    <!-- single-product end -->
-</div>
-</div>
-<!-- pagination start -->
+        <!-- single-product end -->
 
 
-
-<!-- pagination end -->
-<!-- pagination start -->
-<!--<div class="shop-pagination">-->
-<!--    <div class="pagination">-->
-<!--        <ul>-->
-<!--            <li class="active">1</li>-->
-<!--            <li><a href="#">2</a></li>-->
-<!--            <li><a href="#">3</a></li>-->
-<!--            <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>-->
-<!--            <div class="row">-->
-                <?=
-                /** @var TYPE_NAME $pages */
-                \yii\bootstrap4\LinkPager::widget([
-                        'linkContainerOptions'=>['class' => "shop-pagination"],
-                        'activePageCssClass'=>'active',
-                    'options' => ['class' => 'pagination','style' => 'color: #777'],
-                    'linkOptions' => ['class' => 'row', 'style' => ' background-color: #0000'],
-                    'disabledPageCssClass' => 'shop-pagination',
-                    'pagination' => $pages,
-                    'maxButtonCount' => 3,
-                    'firstPageCssClass'=>'active'
-                ]) ?>
-<!--            </div>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
-<!-- pagination end -->
-</div>
-</div>
-</div>
-</div>
-<!-- blog-area end -->
-<!-- brand-area start -->
 <div class="brand-area pad-60">
     <div class="container">
         <!-- section-heading start -->
@@ -167,62 +205,19 @@
         <!-- section-heading end -->
         <div class="row">
             <div class="brand-curosel">
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
-                <!-- single-brand start -->
-                <div class="col-md-2">
-                    <div class="single-brand">
-                        <a href="#"><img src="img/brand/1.png" alt=""/></a>
-                    </div>
-                </div>
-                <!-- single-brand end -->
+                <? if (!empty($brands)) {
+                    foreach ($brands as $brand) { ?>
+
+
+                        <!-- single-brand start -->
+                        <div class="col-md-2">
+                            <div class="single-brand">
+                                <a href="#"><img src="<?php echo $brand->getImageUrl() ?>" alt=""/></a>
+                            </div>
+                        </div>
+                        <!-- single-brand end -->
+                    <? }
+                } ?>
             </div>
         </div>
     </div>

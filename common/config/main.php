@@ -12,7 +12,8 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'formatter' => [
-            'class' => 'yii\i18n\Formatter',
+            'language' => 'ru-RU',
+//            'class' => 'yii\i18n\Formatter',
             'locale' => 'ru-RU', //ej. 'es-ES'
             'thousandSeparator' => '.',
             'decimalSeparator' => ',',

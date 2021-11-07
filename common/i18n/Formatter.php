@@ -1,18 +1,8 @@
 <?php
-/**
- * User: TheCodeholic
- * Date: 12/18/2020
- * Time: 10:48 AM
- */
 
 namespace common\i18n;
 
-/**
- * Class Formatter
- *
- * @author  Zura Sekhniashvili <zurasekhniashvili@gmail.com>
- * @package common\i18n
- */
+
 class Formatter extends \yii\i18n\Formatter
 {
     public function asOrderStatus($status)

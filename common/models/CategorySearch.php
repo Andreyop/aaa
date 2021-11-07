@@ -18,7 +18,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'parent_id'], 'integer'],
-            [['title', 'description', 'keywords', 'image', 'create_at', 'update_at'], 'safe'],
+            [['title', 'description', 'keywords', 'image', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -60,8 +60,8 @@ class CategorySearch extends Category
         $query->andFilterWhere([
             'id' => $this->id,
             'parent_id' => $this->parent_id,
-            'create_at' => $this->create_at,
-            'update_at' => $this->update_at,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

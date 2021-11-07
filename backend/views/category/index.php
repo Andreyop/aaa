@@ -33,10 +33,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'keywords',
             //'image',
-            //'create_at',
-            //'update_at',
+            [
+                'attribute' => 'created_at',
+                'format' => ['datetime'],
+                'contentOptions' => ['style' => 'white-space: nowrap']
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => ['datetime'],
+                'contentOptions' => ['style' => 'white-space: nowrap']
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => [
+                    'class' => 'td-actions'
+                ]
+            ],
         ],
     ]); ?>
 

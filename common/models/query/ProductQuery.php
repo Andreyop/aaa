@@ -33,7 +33,7 @@ class ProductQuery extends \yii\db\ActiveQuery
     }
 
     /**
-     * @return \common\models\query\ProductQuery
+     * @return ProductQuery
      */
     public function published()
     {
@@ -43,5 +43,13 @@ class ProductQuery extends \yii\db\ActiveQuery
     public function id($id)
     {
         return $this->andWhere(['id' => $id]);
+    }
+
+    /**
+     * @return ProductQuery
+     */
+    public function sale()
+    {
+        return $this->andWhere(['sale' => 1]);
     }
 }

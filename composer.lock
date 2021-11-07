@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a3948ce26855435365961a544e0ac39",
+    "content-hash": "15f225cf11855a6e87dad27766927f06",
     "packages": [
         {
             "name": "2amigos/yii2-ckeditor-widget",
@@ -454,6 +454,52 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/master"
             },
             "time": "2020-06-29T00:56:53+00:00"
+        },
+        {
+            "name": "ladamalina/lingua-stem-ru",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ladamalina/php-lingua-stem-ru.git",
+                "reference": "c530218ee019b6e08008c537b3958fe745775f1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ladamalina/php-lingua-stem-ru/zipball/c530218ee019b6e08008c537b3958fe745775f1a",
+                "reference": "c530218ee019b6e08008c537b3958fe745775f1a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "codeception/base": "^2.2.3",
+                "codeception/specify": "~0.4.3",
+                "codeception/verify": "~0.3.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nadezhda Ryabtsova",
+                    "email": "nadezhdaryabtsova@gmail.com"
+                }
+            ],
+            "description": "Стеммер Портера. Извлечение корня из русского слова, без словаря.",
+            "support": {
+                "issues": "https://github.com/ladamalina/php-lingua-stem-ru/issues",
+                "source": "https://github.com/ladamalina/php-lingua-stem-ru/tree/master"
+            },
+            "time": "2017-09-24T06:29:50+00:00"
         },
         {
             "name": "npm-asset/bootstrap",
@@ -5614,7 +5660,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ladamalina/lingua-stem-ru": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

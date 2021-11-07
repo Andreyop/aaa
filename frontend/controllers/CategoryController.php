@@ -2,8 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\models\Brands;
 use common\models\Category;
 use common\models\Product;
+use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\web\NotFoundHttpException;
 
@@ -12,6 +14,13 @@ class CategoryController extends AppController
 
     public function actionView($id)
     {
+        $brands = Brands::find()->where(['status' => 1])->limit(12)->all();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->where(['category_id' => $id]),
+
+        ]);
+        $product_sale = Product::find()->where(['sale' => 1])->limit(3)->all();
         $category = Category::findOne($id);
         if (empty($category)) {
             throw new NotFoundHttpException('Такой категории нет...');
@@ -22,13 +31,16 @@ class CategoryController extends AppController
         //$products = Product::find()->where(['category_id' => $id])->all();
 
         $query = Product::find()->where(['category_id' => $id]);
-        $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 6, 'forcePageParam' => false, 'pageSizeParam' => false]);
+        $pages = new Pagination(['totalCount' => $query->count(), 'pageSize' => 2, 'forcePageParam' => false, 'pageSizeParam' => false]);
         $products = $query->offset($pages->offset)->limit($pages->limit)->all();
 
         return $this->render('view', [
                 'products' => $products,
                 'category' => $category,
-                'pages' => $pages
+                'pages' => $pages,
+                'brands' => $brands,
+                'dataProvider' => $dataProvider,
+                'product_sale' => $product_sale
             ]
 
         );

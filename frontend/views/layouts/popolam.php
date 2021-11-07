@@ -12,8 +12,10 @@
 /** @var \common\models\Product $model */
 /** @var TYPE_NAME $category */
 /** @var TYPE_NAME $product */
+
 /** @var float $totalPrice */
 
+use common\models\CartItem;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap4\Nav;
@@ -21,8 +23,13 @@ use yii\bootstrap4\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\widgets\Pjax;
+
 
 $cartItemCount = $this->params['cartItemCount'];
+$totalPrice = CartItem::getTotalPriceForUser(currUserId());
+$cartItems = new CartItem();
+$cartItems = CartItem::getItemsForUser(currUserId());
 
 
 AppAsset::register($this);
@@ -65,36 +72,41 @@ AppAsset::register($this);
                 <!-- header-top-right start -->
                 <div class="col-lg-6 col-md-6 col-sm-5">
                     <div class="header-top-right">
-                                    <div class="top-menu">
-                          <?  if (Yii::$app->user->isGuest) {
-                            $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-                            $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+                        <div class="top-menu">
+                           <div class="mainmenu1">
+
+                            <? if (Yii::$app->user->isGuest) {
+                                $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+                                $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
                             } else {
-                            $menuItems[] = [
-                            'label' => Yii::$app->user->identity->getDisplayName(),
-                                        'dropDownOptions' => [
-                                           'class' => 'top-menu'
+                                $menuItems[] = [
+                                    'label' => Yii::$app->user->identity->getDisplayName(),
+                                    'dropDownOptions' => [
+                                        'class' => 'dropdown-content'
+
+                                    ],
+                                    'items' => [
+                                        [
+                                            'label' => 'Profile',
+                                            'url' => ['/profile/index'],
                                         ],
-                            'items' => [
-                            [
-                            'label' => 'Profile',
-                            'url' => ['/profile/index'],
-                            ],
-                            [
-                            'label' => 'Logout',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => [
-                            'data-method' => 'post'
-                            ],
-                            ]
-                            ]
-                            ];
+                                        [
+                                            'label' => 'Logout',
+                                            'url' => ['/site/logout'],
+                                            'linkOptions' => [
+                                                'data-method' => 'post'
+                                            ],
+                                        ]
+                                    ]
+                                ];
                             }
-                          echo Nav::widget([
-                              'options' => ['class' => 'header-top-right'],
-                              'items' => $menuItems,
-                          ]);
+                            echo Nav::widget([
+                                'options' => ['class' => 'header-top-right'],
+                                'items' => $menuItems,
+                            ]);
                             ?>
+
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +122,7 @@ AppAsset::register($this);
                 <!-- logo start -->
                 <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
                     <div class="logo">
-                        <a href="<? \yii\helpers\Url::home() ?>"><img src="/img/logo/logo.png" alt=""/></a>
+                        <a href="<? echo \yii\helpers\Url::home(); ?>"><img src="/img/logo/logo.png" alt="<?= $this->title ?>"/></a>
                     </div>
                 </div>
                 <!-- logo end -->
@@ -123,28 +135,52 @@ AppAsset::register($this);
                                                     id="cart-quantity"
                                                     class="badge badge-danger"><?= $cartItemCount; ?></span>
 
+		<div class="mini-cart-content">
+                <?php Pjax::begin(); ?>
+                <?php if (!empty($cartItems)): ?>
+                    <?php foreach ($cartItems as $item): ?>
+                        <div class="cart-img-details">
+											<div class="cart-img-photo">
+												<a href="<?php echo \yii\helpers\Url::to(['/cart/change-quantity']) ?>"><img
+                                                            src="<?php echo \common\models\Product::formatImageUrl($item['image']) ?>"
+                                                            alt=""/></a>
+												<span class="quantity"><?php echo $item['quantity'] ?></span>
+											</div>
+											<div class="cart-img-contaent">
+												<a href="#"><p><?php echo $item['name'] ?></p></a>
+												<span><?= $item['price'] ?> грн.</span>
+											</div>
+											<div class="pro-del">       <?php echo \yii\helpers\Html::a('Delete', ['/cart/delete', 'id' => $item['id']], [
+                                                    'class' => 'btn btn-outline-danger btn-sm',
+                                                    'data-method' => 'post',
+                                                    'data-confirm' => 'Вы уверены, что хотите удалить этот товар из корзины?'
+                                                ]) ?>
+											</div>
+										</div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            <?php Pjax::end(); ?>
+										<div class="cart-inner-bottom">
+											<p class="total">Subtotal: <span class="amount"><?php echo $totalPrice ?> Грн.</span></p>
+											<div class="clear"></div>
+											<p class="cart-button-top"><a href="checkout.html">Checkout</a></p>
+										</div>
+									</div>
 
- <div class="mini-cart-content">
-
-<?= $this->render('/././cartmini/index'); ?>
-
-
-                                    <div class="clear"></div>
-
-
-
-
-
-                                </div>
                             </li>
                         </ul>
                     </div>
-
                     <!-- cart-total end -->
                     <!-- header-search start -->
                     <div class="header-search">
-                        <form action="#">
-                            <input type="text" placeholder="Search product..."/>
+                        <form method="post" action="<?= Url::to(['site/search']); ?>" class="pull-right">
+                            <?=
+                            Html::hiddenInput(
+                                Yii::$app->request->csrfParam,
+                                Yii::$app->request->csrfToken
+                            );
+                            ?>
+                            <input type="text" name="query" class="form-control" placeholder="Search product..."/>
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
@@ -259,7 +295,7 @@ AppAsset::register($this);
 <!-- header end -->
 
 
-<?//= $this->render('\inc\sidebar') ?>
+<? //= $this->render('\inc\sidebar') ?>
 <?= Alert::widget() ?>
 
 

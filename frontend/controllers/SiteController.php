@@ -1,7 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Brands;
+use common\models\CartItem;
 use common\models\Product;
+use common\models\SortForm;
 use common\models\UserAddress;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -77,14 +80,21 @@ class SiteController extends \frontend\base\Controller
      */
     public function actionIndex()
     {
+        $brands = Brands::find()->where(['status' => 1])->limit(12)->all();
+        $product_sale = Product::find()->where(['sale' => 1])->limit(3)->all();
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->published(),
+            'pagination' => [
+                'pageSize' => 18,
+            ],
+
         ]);
         return $this->render('index', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'product_sale' => $product_sale,
+            'brands' => $brands,
         ]);
     }
-
     /**
      * Logs in a user.
      *
@@ -232,4 +242,42 @@ class SiteController extends \frontend\base\Controller
             'model' => $model
         ]);
     }
+    /**
+     * Результаты поиска по каталогу товаров
+     */
+    public function actionSearch($query = '', $page = 1) {
+        /*
+         * Чтобы получить ЧПУ, выполняем редирект на site/search/query/ламинат
+         * после отправки поискового запроса из формы методом POST. Если строка
+         * поискового запроса пустая, выполняем редирект на site/search.
+         */
+        if (Yii::$app->request->isPost) {
+            $query = Yii::$app->request->post('query');
+            if (is_null($query)) {
+                return $this->redirect(['site/search']);
+            }
+            $query = trim($query);
+            if (empty($query)) {
+                return $this->redirect(['site/search']);
+            }
+            $query = urlencode(Yii::$app->request->post('query'));
+            return $this->redirect(['site/search/query/'.$query]);
+        }
+
+        $page = (int)$page;
+
+        // получаем результаты поиска с постраничной навигацией
+        list($products, $pages) = (new Product())->getSearchResult($query, $page);
+
+        // устанавливаем мета-теги для страницы
+//        $this->setMetaTags('Поиск по каталогу');
+
+        return $this->render(
+            'search',
+            compact('products', 'pages')
+        );
+    }
+
+
+
 }

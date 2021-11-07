@@ -45,14 +45,26 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
                 'category/<id:\d+>/page/<page:\d+>' => 'category/view',
                 'category/<id:\d+>' => 'category/view',
                 'product/<id:\d+>/page/<page:\d+>' => 'product/view',
                 'product/<id:\d+>' => 'product/view',
+                'brand/<id:\d+>' => 'brands/brand',
+                'brands/' => 'brands/brands',
                 'search' => 'category/search',
-
-            ],
+                'site/category/<id:\d+>/page/<page:\d+>' => 'site/category',
+                'site/category/<id:\d+>' => 'site/category',
+                'site/brand/<id:\d+>/page/<page:\d+>' => 'site/brand',
+                'site/brand/<id:\d+>' => 'site/brand',
+                'site/product/<id:\d+>' => 'site/product',
+                // правило для 2, 3, 4 страницы результатов поиска
+                'site/search/query/<query:.*?>/page/<page:\d+>' => 'site/search',
+                // правило для первой страницы результатов поиска
+                'site/search/query/<query:.*?>' => 'site/search',
+                // правило для первой страницы с пустым запросом
+                'site/search' => 'site/search',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
+               ],
         ],
         'assetManager' => [
             'appendTimestamp' => true,

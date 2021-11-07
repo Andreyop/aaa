@@ -99,7 +99,6 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $cats = Category::find()->all();
         $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -108,7 +107,6 @@ class ProductController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'cats' => $cats,
         ]);
     }
 

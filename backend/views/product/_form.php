@@ -15,8 +15,11 @@ use yii\bootstrap4\ActiveForm;
         'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
     <?= $form->field($model, 'category_id')->dropDownList(
-        \yii\helpers\ArrayHelper::map($cats, 'id', 'title'
-    )) ?>
+        \yii\helpers\ArrayHelper::map(\common\models\Category::find()->all(), 'id', 'title')
+    ) ?>
+    <?= $form->field($model, 'brands_id')->dropDownList(
+        \yii\helpers\ArrayHelper::map(\common\models\Brands::find()->all(), 'id', 'name')
+    ) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

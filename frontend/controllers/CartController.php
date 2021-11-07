@@ -72,7 +72,7 @@ class CartController extends \frontend\base\Controller
         $id = \Yii::$app->request->post('id');
         $product = Product::find()->id($id)->published()->one();
         if (!$product) {
-            throw new NotFoundHttpException("Product does not exist");
+            throw new NotFoundHttpException("Товар не существует");
         }
 
         if (\Yii::$app->user->isGuest) {

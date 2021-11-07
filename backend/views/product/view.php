@@ -33,6 +33,7 @@ YiiAsset::register($this);
             'attributes' => [
                 'id',
                 'category_id',
+                'brands_id',
                 [
                     'attribute' => 'image',
                     'format' => ['html'],
@@ -46,6 +47,14 @@ YiiAsset::register($this);
                 ],
                 'description:html',
                 'price:currency',
+                'old_price:currency',
+                [
+                    'attribute' => 'sale',
+                    'format' => 'html',
+                    'value' =>Html::tag('span', $model->status ? 'Active' : 'Draft', [
+                        'class' => $model->status ? 'badge badge-success' : 'badge badge-danger'
+                    ]),
+                ],
                 [
                     'attribute' => 'status',
                     'format' => 'html',
@@ -53,6 +62,7 @@ YiiAsset::register($this);
                         'class' => $model->status ? 'badge badge-success' : 'badge badge-danger'
                     ]),
                 ],
+
 
                 'created_at:datetime',
                 'updated_at:datetime',
