@@ -35,7 +35,6 @@ use yii\widgets\Pjax;
 
 
 <!-- blog-area start -->
-<!-- blog-area start -->
 <div class="shop-area">
     <div class="container">
         <div class="row">
@@ -44,7 +43,7 @@ use yii\widgets\Pjax;
                 <!-- widget-categories start -->
                 <aside class="widget widget-categories">
                     <!--                <aside class="widget widget-categories" >-->
-                    <h3 class="sidebar-title">Categories</h3>
+                    <h3 class="sidebar-title"><b>Категории</b></h3>
                     <div class="mainmenu">
                         <ul class="sidebar-menu">
                             <?= frontend\components\MenuWidget::widget([
@@ -53,22 +52,40 @@ use yii\widgets\Pjax;
                             ]) ?>
                         </ul>
                 </aside>
-                </aside>
                 <aside class="widget widget-categories">
                     <!--                <aside class="widget widget-categories" >-->
-                    <h3 class="sidebar-title">Brands</h3>
+                    <h3 class="sidebar-title"><b>Популярные бренды</b></h3>
                     <div class="mainmenu">
                         <ul class="sidebar-menu">
                             <?= BrandsWidget::widget(); ?>
                         </ul>
                 </aside>
+
                 <!-- shop-filter start -->
                 <aside class="widget shop-filter">
-                    <h3>Price</h3>
-                    <input type="hidden" id="hidden_minimum_price" value="0"/>
-                    <input type="hidden" id="hidden_maximum_price" value="65000"/>
-                    <p id="price_show">1000 - 65000</p>
-                    <div id="price_range"></div>
+
+                    <h3 class="sidebar-title">Price</h3>
+                    <div class="info_widget">
+                        <div class="price_filter">
+                            <input type="hidden" id="hidden_minimum_price" value="0"/>
+                            <input type="hidden" id="hidden_maximum_price" value="65000"/>
+                            <p id="amount">1000 - 65000</p>
+                            <div id="slider-range"></div>
+                        </div>
+                    </div>
+                </aside>
+                <aside class="widget shop-filter">
+                    <h3 class="sidebar-title">price</h3>
+
+                    <div class="info_widget">
+                        <div class="price_filter">
+                            <div id="slider-range"></div>
+                            <div class="price_slider_amount">
+                                <input type="text" id="amount" name="price" placeholder="Add Your Price"/>
+                                <input type="submit" value="Filter"/>
+                            </div>
+                        </div>
+                    </div>
                 </aside>
                 <!-- shop-filter end -->
                 <!-- filter-by start -->
@@ -136,13 +153,16 @@ use yii\widgets\Pjax;
                 <!-- widget-recent end -->
             </div>
             <!-- blog-left-sidebar end -->
+
+
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                 <!-- toolbar start -->
                 <div class="toolbar">
                     <div class="show-result">
-                        <p> Showing 0–<? echo $count = $dataProvider->getCount(); ?>
-                            of <? echo $totalCount = $dataProvider->getTotalCount(); ?> results</p>
+                        <p> Показано от 0 до <? echo $count = $dataProvider->getCount(); ?>
+                            из <? echo $totalCount = $dataProvider->getTotalCount(); ?> результатов</p>
                     </div>
+
 
                     <div class="toolbar-form">
 
@@ -151,55 +171,50 @@ use yii\widgets\Pjax;
                                 по:
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="<?= \yii\helpers\Url::to(['brand/' . $brand->id . '?sort=price']); ?>">Цене,
-                                        по возрастанию</a></li>
-                                <li><a href="<?= \yii\helpers\Url::to(['brand/' . $brand->id . '?sort=-price']); ?>">Цене,
-                                        по убыванию</a></li>
-                                <li><a href="<?= \yii\helpers\Url::to(['brand/' . $brand->id . '?sort=name']); ?>">Названию
-                                        товара, от А до Я</a></li>
-                                <li><a href="<?= \yii\helpers\Url::to(['brand/' . $brand->id . '?sort=-name']); ?>">Названию
-                                        товара, от Я до А</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=price']); ?>">Цене, по возрастанию</a>
+                                </li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=-price']); ?>">Цене, по убыванию</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=name']); ?>">Названию товара, от А до
+                                        Я</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=-name']); ?>">Названию товара, от Я до
+                                        А</a></li>
                             </ul>
                         </div>
                     </div>
-
-
                     <!-- toolbar end -->
-
-
-                    <!-- widget-recent end -->
-                    <!-- blog-left-sidebar end -->
-                    <div class="clear"></div>
-
-
-                    <?php Pjax::begin(); ?>
-
-                    <?php echo ListView::widget([
-                        'dataProvider' => $dataProvider,
-                        'layout' => '<div class="row">{items}</div>{pager}',
-                        'itemView' => '_product_item',
-                        'itemOptions' => [
-
-                            'class' => 'col-lg-4 col-md-6 mb-4  single-product',
-
-                        ],
-
-                        'pager' => [
-
-                            'options' => ['class' => 'pagination', 'style' => 'color: #777'],
-                            'linkOptions' => ['class' => 'row', 'style' => ' background-color: #0000'],
-                            'disabledPageCssClass' => 'shop-pagination',
-                            'class' => LinkPager::class
-                        ]
-                    ]) ?>
-                    <?php Pjax::end(); ?>
-
                 </div>
+                <!-- widget-recent end -->
+                <!-- blog-left-sidebar end -->
+                <div class="clear"></div>
+
+                <?php Pjax::begin(); ?>
+                <?php echo ListView::widget([
+                    'dataProvider' => $dataProvider,
+                    'layout' => '<div class="row">{items}</div>{pager}',
+                    'itemView' => '_product_item',
+                    'itemOptions' => [
+
+                        'class' => 'col-lg-4 col-md-6 mb-4  single-product',
+
+                    ],
+
+                    'pager' => [
+
+                        'options' => ['class' => 'pagination', 'style' => 'color: #777'],
+                        'linkOptions' => ['class' => 'row', 'style' => ' background-color: #0000'],
+                        'disabledPageCssClass' => 'shop-pagination',
+                        'class' => LinkPager::class
+                    ]
+                ]) ?>
+                <?php Pjax::end(); ?>
             </div>
         </div>
     </div>
 </div>
-<!-- single-product end -->
+</div>
+
+<!-- blog-area end -->
+<!-- brand-area start -->
 <div class="brand-area pad-60">
     <div class="container">
         <!-- section-heading start -->
@@ -221,9 +236,11 @@ use yii\widgets\Pjax;
 
 
                         <!-- single-brand start -->
-                        <div class="col-md-2">
+                        <div class="col-md-12">
                             <div class="single-brand">
-                                <a href="#"><img src="<?php echo $brand->getImageUrl() ?>" alt=""/></a>
+                                <a href="<?= \yii\helpers\Url::to(['/brand/' . $brand->id]); ?>"><img
+                                            src="<?php echo $brand->getImageUrl() ?>"
+                                            alt="<?= $brand->name; ?>"/></a>
                             </div>
                         </div>
                         <!-- single-brand end -->
@@ -232,5 +249,5 @@ use yii\widgets\Pjax;
             </div>
         </div>
     </div>
-</div>
-<!-- brand-area end -->
+
+</div><!-- brand-area end -->

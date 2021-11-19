@@ -30,7 +30,7 @@
     </div>
 </div>
 <div class="product-content">
-    <h2 class="product-name"><a href="#"><h3><?= $model->name ?></h3> <?= $model->description ?></a></h2>
+    <h2 class="product-name"><a href="#"><h3><?= $model->name ?></h3> <?= $model->getShortDescription() ?></a></h2>
 
     <div class="price-box">
         <span class="new-price"><?= $model->price ?> грн.</span>

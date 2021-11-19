@@ -72,8 +72,8 @@ class ProductSearch extends Product
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'description', $this->description]);
+//            ->andFilterWhere(['like', 'image', $this->image]);
 
         return $dataProvider;
     }

@@ -23,7 +23,8 @@ class BrandsController extends \frontend\base\Controller
             'query' => Product::find()->published(),
             'pagination' => [
                 'pageSize' =>15,
-            ]  ]);
+            ]
+        ]);
         return $this->render(
             'brands', [
             'brands' => $brands,

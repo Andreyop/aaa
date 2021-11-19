@@ -5,32 +5,32 @@
     <span class="sale-text">Sale</span>
 <?php } ?>
 <div class="product-img">
-    <a href="<?php echo \yii\helpers\Url::to(['product/view?id=' . $model->id]) ?>">
+    <a href="<?php echo \yii\helpers\Url::to(['product/' . $model->id]) ?>">
         <img class="primary-image" src="<?php echo $model->getImageUrl() ?>" alt=""/>
 
     </a>
     <div class="actions">
         <div class="action-buttons">
             <div class="add-to-cart">
-                <a href="<?php echo \yii\helpers\Url::to(['/cart/add']) ?>" class="btn-add-to-cart">Add to cart</a>
+                <a href="<?php echo \yii\helpers\Url::to(['/cart/add']) ?>" class="btn-add-to-cart">Добавить в корзину</a>
             </div>
-            <div class="add-to-links">
-                <div class="add-to-wishlist">
-                    <a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-star"></i>
-                    </a>
-                </div>
-                <div class="compare-button">
-                    <a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>
-                </div>
-            </div>
+<!--            <div class="add-to-links">-->
+<!--                <div class="add-to-wishlist">-->
+<!--                    <a href="#" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-star"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--                <div class="compare-button">-->
+<!--                    <a href="#" data-toggle="tooltip" title="Compare"><i class="fa fa-exchange"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="quickviewbtn">
-                <a href="#" data-toggle="tooltip" title="Quick View"><i class="fa fa-search-plus"></i></a>
+                <a href="<?php echo \yii\helpers\Url::to(['product/' . $model->id]) ?>" data-toggle="tooltip" title="Просмотреть"><i class="fa fa-search-plus"></i></a>
             </div>
         </div>
     </div>
 </div>
 <div class="product-content">
-    <h2 class="product-name"><a href="#"><h3><?= $model->name ?></h3> <?= $model->description ?></a></h2>
+    <h2 class="product-name"><a href="<?php echo \yii\helpers\Url::to(['product/' . $model->id]) ?>"><h4><?= $model->name ?></h4> </a></h2>
 
     <div class="price-box">
         <span class="new-price"><?= $model->price ?> грн.</span>

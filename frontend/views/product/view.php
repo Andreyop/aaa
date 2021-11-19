@@ -108,14 +108,7 @@
                             <div role="tabpanel" class="tab-pane active" id="tab-desc">
                                 <div class="product-tab-desc">
                                     <p><?= $product->description; ?></p>
-                                    <p>Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis
-                                        fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa
-                                        massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit
-                                        est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere
-                                        nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et,
-                                        luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod
-                                        eget.</p>
+
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="page-comments">
@@ -276,16 +269,16 @@
                                 <div class="single-product">
                                     <div class="product-img1">
                                         <a href="#">
-                                            <img class="primary-image" src="<?php echo \common\models\Product::formatImageUrl($value['image']) ?>" alt="" />
-                                            <img class="secondary-image" src="img/product/16.jpg" alt="" />
+                                            <img class="primary-image" style="width: 150px" src="<?php echo \common\models\Product::formatImageUrl($value['image']) ?>" alt="" />
+<!--                                            <img class="secondary-image" src="img/product/16.jpg" alt="" />-->
                                         </a>
                                     </div>
                                     <div class="product-content">
                                         <div class="pro-info">
-                                            <h2 class="product-name"><a href="#">Curabitur vulputate</a></h2>
+                                            <h2 class="product-name"><a href="#"><?= $value->name ?></a></h2>
                                             <div class="price-box">
-                                                <span class="new-price"><?= $value->name ?></span>
-                                                <span class="old-price">£120.00</span>
+                                                <span class="new-price"><?= $value->price ?></span>
+                                                <span class="old-price"><?= $value->old_price ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -312,7 +305,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading">
-                    <h3>Our Brands</h3>
+                    <h3>Наши бренды</h3>
                     <div class="title-icon">
                         <span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
                     </div>

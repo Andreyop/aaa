@@ -1,16 +1,14 @@
 <?php
 
 /* @var $this yii\web\View */
-
+/* @var $model common\models\Product */
+/* @var $form yii\bootstrap4\ActiveForm */
 /** @var \yii\data\ActiveDataProvider $dataProvider */
-
 use frontend\components\BrandsWidget;
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use yii\widgets\ListView;
 use yii\widgets\Pjax;
-
 $this->title = 'Po-polam';
 ?>
 
@@ -39,7 +37,7 @@ $this->title = 'Po-polam';
                 <!-- widget-categories start -->
                 <aside class="widget widget-categories">
                     <!--                <aside class="widget widget-categories" >-->
-                    <h3 class="sidebar-title">Categories</h3>
+                    <h3 class="sidebar-title"><b>Категории</b></h3>
                     <div class="mainmenu">
                         <ul class="sidebar-menu">
                             <?= frontend\components\MenuWidget::widget([
@@ -50,21 +48,23 @@ $this->title = 'Po-polam';
                 </aside>
                 <aside class="widget widget-categories">
                     <!--                <aside class="widget widget-categories" >-->
-                    <h3 class="sidebar-title">Brands</h3>
+                    <h3 class="sidebar-title"><b>Популярные бренды</b></h3>
                     <div class="mainmenu">
                         <ul class="sidebar-menu">
                             <?= BrandsWidget::widget(); ?>
                         </ul>
                 </aside>
 
+<!--                <input type="range" min="12" max="2175" value="12" class="slider" id="lower">-->
+<!--                <input type="range" min="12" max="2175" value="2175" class="slider" id="higher">-->
+
                 <!-- shop-filter start -->
                 <aside class="widget shop-filter">
-                    <h3>Price</h3>
-                    <input type="hidden" id="hidden_minimum_price" value="0"/>
-                    <input type="hidden" id="hidden_maximum_price" value="65000"/>
-                    <p id="price_show">1000 - 65000</p>
-                    <div id="price_range"></div>
+                    <div id="slider"></div>
                 </aside>
+
+
+
                 <!-- shop-filter end -->
                 <!-- filter-by start -->
                 <aside class="widget filter-by">
@@ -137,9 +137,10 @@ $this->title = 'Po-polam';
                 <!-- toolbar start -->
                 <div class="toolbar">
                     <div class="show-result">
-                        <p> Showing 0–<? echo $count = $dataProvider->getCount(); ?>
-                            of <? echo $totalCount = $dataProvider->getTotalCount(); ?> results</p>
+                        <p> Показано от 0 до <? echo $count = $dataProvider->getCount(); ?>
+                            из <? echo $totalCount = $dataProvider->getTotalCount(); ?> результатов</p>
                     </div>
+
 
                     <div class="toolbar-form">
 
@@ -151,16 +152,19 @@ $this->title = 'Po-polam';
                                 <li><a href="<?= \yii\helpers\Url::to(['?sort=price']); ?>">Цене, по возрастанию</a>
                                 </li>
                                 <li><a href="<?= \yii\helpers\Url::to(['?sort=-price']); ?>">Цене, по убыванию</a></li>
-                                <li><a href="<?= \yii\helpers\Url::to(['?sort=name']); ?>">Названию товара, от А до Я</a></li>
-                                <li><a href="<?= \yii\helpers\Url::to(['?sort=-name']); ?>">Названию товара, от Я до А</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=name']); ?>">Названию товара, от А до
+                                        Я</a></li>
+                                <li><a href="<?= \yii\helpers\Url::to(['?sort=-name']); ?>">Названию товара, от Я до
+                                        А</a></li>
                             </ul>
                         </div>
                     </div>
                     <!-- toolbar end -->
-                    </aside>
-                    <!-- widget-recent end -->
-                    <!-- blog-left-sidebar end -->
-                    <div class="clear"></div>
+                </div>
+                <!-- widget-recent end -->
+                <!-- blog-left-sidebar end -->
+                <div class="clear"></div>
+
                     <?php Pjax::begin(); ?>
                     <?php echo ListView::widget([
                         'dataProvider' => $dataProvider,
@@ -181,46 +185,47 @@ $this->title = 'Po-polam';
                         ]
                     ]) ?>
                     <?php Pjax::end(); ?>
-                </div>
+            </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- blog-area end -->
-    <!-- brand-area start -->
-    <div class="brand-area pad-60">
-        <div class="container">
-            <!-- section-heading start -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h3>Our Brands</h3>
-                        <div class="title-icon">
-                            <span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
-                        </div>
+<!-- blog-area end -->
+<!-- brand-area start -->
+<div class="brand-area pad-60">
+    <div class="container">
+        <!-- section-heading start -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h3>НАШИ БРЕНДЫ</h3>
+                    <div class="title-icon">
+                        <span><i class="fa fa-angle-left"></i> <i class="fa fa-angle-right"></i></span>
                     </div>
                 </div>
             </div>
-            <!-- section-heading end -->
-            <div class="row">
-                <div class="brand-curosel">
-                    <? if (!empty($brands)) {
-                        foreach ($brands as $brand) { ?>
+        </div>
+        <!-- section-heading end -->
+        <div class="row">
+            <div class="brand-curosel">
+                <? if (!empty($brands)) {
+                    foreach ($brands as $brand) { ?>
 
 
-                            <!-- single-brand start -->
-                            <div class="col-md-2">
-                                <div class="single-brand">
-                                    <a href="#"><img src="<?php echo $brand->getImageUrl() ?>" alt=""/></a>
-                                </div>
+                        <!-- single-brand start -->
+                        <div class="col-md-12">
+                            <div class="single-brand">
+                                <a href="<?= \yii\helpers\Url::to(['/brand/' . $brand->id]); ?>"><img
+                                            src="<?php echo $brand->getImageUrl() ?>"
+                                            alt="<?= $brand->name; ?>"/></a>
                             </div>
-                            <!-- single-brand end -->
-                        <? }
-                    } ?>
-                </div>
+                        </div>
+                        <!-- single-brand end -->
+                    <? }
+                } ?>
             </div>
         </div>
-
     </div>
-    <!-- brand-area end -->
 
+</div>

@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'filter' => Html::activeDropDownList($searchModel, 'status', \common\models\Order::getStatusLabels(), [
                     'class' => 'form-control',
-                    'prompt' => 'All'
+                    'prompt' => 'Все заказы'
                 ]),
                 'format' => ['orderStatus']
             ],

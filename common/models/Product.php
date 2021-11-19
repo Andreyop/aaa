@@ -202,7 +202,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getShortDescription()
     {
-        return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 30);
+        return \yii\helpers\StringHelper::truncateWords(strip_tags($this->description), 4);
     }
 
     public function afterDelete()

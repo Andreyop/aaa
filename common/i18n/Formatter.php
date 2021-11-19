@@ -8,13 +8,13 @@ class Formatter extends \yii\i18n\Formatter
     public function asOrderStatus($status)
     {
         if ($status == \common\models\Order::STATUS_COMPLETED) {
-            return \yii\bootstrap4\Html::tag('span', 'Completed', ['class' => 'badge badge-success']);
+            return \yii\bootstrap4\Html::tag('span', 'Завершенный', ['class' => 'badge badge-success']);
         } else if ($status == \common\models\Order::STATUS_PAID) {
-            return \yii\bootstrap4\Html::tag('span', 'Paid', ['class' => 'badge badge-primary']);
+            return \yii\bootstrap4\Html::tag('span', 'Оплаченный', ['class' => 'badge badge-primary']);
         } else if ($status == \common\models\Order::STATUS_DRAFT) {
-            return \yii\bootstrap4\Html::tag('span', 'Unpaid', ['class' => 'badge badge-secondary']);
+            return \yii\bootstrap4\Html::tag('span', 'Неоплаченный', ['class' => 'badge badge-secondary']);
         } else {
-            return \yii\bootstrap4\Html::tag('span', 'Failured', ['class' => 'badge badge-danger']);
+            return \yii\bootstrap4\Html::tag('span', 'Неудачный', ['class' => 'badge badge-danger']);
         }
     }
 }

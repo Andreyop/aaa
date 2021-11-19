@@ -136,7 +136,6 @@ AppAsset::register($this);
                                                     class="badge badge-danger"><?= $cartItemCount; ?></span>
 
 		<div class="mini-cart-content">
-                <?php Pjax::begin(); ?>
                 <?php if (!empty($cartItems)): ?>
                     <?php foreach ($cartItems as $item): ?>
                         <div class="cart-img-details">
@@ -159,11 +158,11 @@ AppAsset::register($this);
 										</div>
                     <?php endforeach; ?>
                 <?php endif; ?>
-            <?php Pjax::end(); ?>
+
 										<div class="cart-inner-bottom">
 											<p class="total">Subtotal: <span class="amount"><?php echo $totalPrice ?> Грн.</span></p>
 											<div class="clear"></div>
-											<p class="cart-button-top"><a href="checkout.html">Checkout</a></p>
+											<p class="cart-button-top"><a href="<? echo Url::to('/cart/index'); ?>">Checkout</a></p>
 										</div>
 									</div>
 
@@ -172,6 +171,7 @@ AppAsset::register($this);
                     </div>
                     <!-- cart-total end -->
                     <!-- header-search start -->
+
                     <div class="header-search">
                         <form method="post" action="<?= Url::to(['site/search']); ?>" class="pull-right">
                             <?=
@@ -200,7 +200,7 @@ AppAsset::register($this);
                             <ul>
                                 <li><a href="<? echo \yii\helpers\Url::home(); ?>">Home</a></li>
                                 <li><a href="<? echo \yii\helpers\Url::to('/site/about'); ?>">About</a></li>
-                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="<?= Url::to(['/brands']); ?>">Бренды</a></li>
                                 <li><a href="shop.html">Shop</a>
                                     <div class="mega-menu">
 											<span>

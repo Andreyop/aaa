@@ -15,8 +15,10 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'build/app.css',
+//        'http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800',
+//        'http://fonts.googleapis.com/css?family=Montserrat:400,700',
 //        'vendor/fontawesome-free/css/all.min.css',
-        'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i',
+       'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i',
 //        'css/sb-admin-2.min.css',
 //        'https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i',
 //        'http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800',
@@ -34,6 +36,8 @@ class AppAsset extends AssetBundle
         'css/main.css',
         'css/style.css',
         'css/responsive.css',
+        'css/jquery-ui.css'
+       // 'https://use.fontawesome.com/releases/v5.3.1/css/all.css"https://use.fontawesome.com/releases/v5.3.1/css/all.css',
 
 
 
@@ -46,27 +50,32 @@ class AppAsset extends AssetBundle
 //        "js/sb-admin-2.min.js",
 //        'js/vendor/modernizr-2.8.3.min.js',
 //        'js/vendor/jquery-1.12.0.min.js',
-        'js/price-slider.js',
+ //       'js/price-slider.js',
         'js/bootstrap.min.js',
         'js/owl.carousel.min.js',
         'js/jquery.scrollUp.min.js',
         'js/jquery.mixitup.min.js',
         'js/fancybox/jquery.fancybox.pack.js',
         'js/jquery.counterup.min.js',
-//        'js/waypoints.min.js',
+       // 'js/waypoints.min.js',
         'js/jquery.meanmenu.js',
         'lib/rs-plugin/js/jquery.themepunch.tools.min.js',
         'lib/rs-plugin/js/jquery.themepunch.revolution.min.js',
         'lib/rs-plugin/rs.home.js',
         'js/plugins.js',
-//        'js/main.js',
+        'js/main.js',
+        'js/main.js',
+        'js/jquery-ui.js',
+//        'https://code.jquery.com/jquery-3.1.1.slim.js',
+//'https://code.jquery.com/jquery-3.1.1.slim.min.js'
+      //  'https://use.fontawesome.com/releases/v5.3.1/js/all.js"https://use.fontawesome.com/releases/v5.3.1/js/all.js',
 
-
-    ];
+            ];
     public $depends = [
         'yii\web\YiiAsset',
-//        'yii\bootstrap4\BootstrapAsset',
-//        JqueryAsset::class,
-//        BootstrapPluginAsset::class
+        'yii\bootstrap4\BootstrapAsset',
+        'yii\bootstrap4\BootstrapPluginAsset',
+        JqueryAsset::class,
+        BootstrapPluginAsset::class
     ];
 }

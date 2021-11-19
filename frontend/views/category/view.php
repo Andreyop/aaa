@@ -210,9 +210,9 @@ use yii\widgets\Pjax;
 
 
                         <!-- single-brand start -->
-                        <div class="col-md-2">
+                        <div class="col-md-12">
                             <div class="single-brand">
-                                <a href="#"><img src="<?php echo $brand->getImageUrl() ?>" alt=""/></a>
+                                <a href="<?= \yii\helpers\Url::to(['/brand/'.$brand->id]); ?>"><img src="<?php echo $brand->getImageUrl() ?>" alt="<?= $brand->name; ?>"/></a>
                             </div>
                         </div>
                         <!-- single-brand end -->

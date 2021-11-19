@@ -179,10 +179,11 @@ class Order extends \yii\db\ActiveRecord
     public static function getStatusLabels()
     {
         return [
-            self::STATUS_PAID => 'Paid',
-            self::STATUS_COMPLETED => 'Completed',
-            self::STATUS_FAILED => 'Failed',
-            self::STATUS_DRAFT => 'Draft'
+            self::STATUS_PAID => 'Оплаченный',
+            self::STATUS_COMPLETED => 'Завершенный',
+            self::STATUS_DRAFT => 'Неоплаченный',
+            self::STATUS_FAILED => 'Неудачный',
+
         ];
     }
 }

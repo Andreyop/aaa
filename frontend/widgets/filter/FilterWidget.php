@@ -7,7 +7,7 @@ use app\models\ObjectStaticValues;
 use app\models\Property;
 use app\models\PropertyGroup;
 use app\models\PropertyStaticValues;
-use app\modules\Shop\models\Product;
+use common\models\Product;
 use Yii;
 use yii\base\Widget;
 use yii\caching\TagDependency;

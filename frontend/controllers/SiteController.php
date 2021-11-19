@@ -4,12 +4,13 @@ namespace frontend\controllers;
 use common\models\Brands;
 use common\models\CartItem;
 use common\models\Product;
-use common\models\SortForm;
+use common\models\ProductSearch;
 use common\models\UserAddress;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -85,14 +86,41 @@ class SiteController extends \frontend\base\Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->published(),
             'pagination' => [
-                'pageSize' => 18,
+                'pageSize' => 21,
             ],
 
         ]);
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
             'product_sale' => $product_sale,
             'brands' => $brands,
+            'dataProvider' => $dataProvider,
+
+        ]);
+    }
+
+    public function actionCreate()
+    {
+        $model = new ProductSearch(); // give your actual model name instead of Model
+        if($model->load(Yii::$app->request->post()))
+        {
+            list($model->min_money, $model->max_money) = explode(',', $model->min_money);
+            // now both $model->min_money and $model->max_money are set and contains value submitted in form by Kartik Slider Widget
+            if($model->save(true))
+            {
+                // success -> redirect
+            }
+            else
+            {
+                // error render to form again
+            }
+
+        }
+    }
+    public function actionAbout()
+    {
+
+        return $this->render('about', [
+
         ]);
     }
     /**
@@ -245,7 +273,8 @@ class SiteController extends \frontend\base\Controller
     /**
      * Результаты поиска по каталогу товаров
      */
-    public function actionSearch($query = '', $page = 1) {
+    public function actionSearch($query = '') {
+
         /*
          * Чтобы получить ЧПУ, выполняем редирект на site/search/query/ламинат
          * после отправки поискового запроса из формы методом POST. Если строка
@@ -260,22 +289,22 @@ class SiteController extends \frontend\base\Controller
             if (empty($query)) {
                 return $this->redirect(['site/search']);
             }
+
             $query = urlencode(Yii::$app->request->post('query'));
             return $this->redirect(['site/search/query/'.$query]);
         }
-
-        $page = (int)$page;
-
-        // получаем результаты поиска с постраничной навигацией
-        list($products, $pages) = (new Product())->getSearchResult($query, $page);
+        $searchModel = new \backend\models\search\ProductSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get($query));
 
         // устанавливаем мета-теги для страницы
 //        $this->setMetaTags('Поиск по каталогу');
 
         return $this->render(
-            'search',
-            compact('products', 'pages')
-        );
+            'search',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+
+        ]);
     }
 
 

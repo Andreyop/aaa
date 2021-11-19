@@ -64,20 +64,20 @@ AppAsset::register($this);
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/order/index']) ?>">
-                <i class="fas fa-money-check-alt"></i>
+                <i class="far fa-clipboard"></i>
                 <span>Orders</span>
             </a>
         </li>
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/category/index']) ?>">
-                <i class="fas fa-fw fa-list"></i>
+                <i class="fas fa-tasks"></i>
                 <span>Categories</span>
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo \yii\helpers\Url::to(['/brands/index']) ?>">
-                <i class="fas fa-fw fa-list"></i>
+                <i class="fas fa-bold"></i>
                 <span>Brands</span>
             </a>
         </li>
@@ -153,19 +153,19 @@ AppAsset::register($this);
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-gradient-dark">
-            <div class="container my-auto">
-                <div class="row copyright">
-                    <div class="col">
-                        &copy; Po-polam <?= date('Y') ?>
-                    </div>
-
-                    <div class="col text-right">
-                        Po-polam
-                    </div>
-                </div>
-            </div>
-        </footer>
+<!--        <footer class="sticky-footer bg-gradient-dark">-->
+<!--            <div class="container my-auto">-->
+<!--                <div class="row copyright">-->
+<!--                    <div class="col">-->
+<!--                        &copy; Po-polam --><?//= date('Y') ?>
+<!--                    </div>-->
+<!---->
+<!--                    <div class="col text-right">-->
+<!--                        Po-polam-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </footer>-->
         <!-- End of Footer -->
 
     </div>
